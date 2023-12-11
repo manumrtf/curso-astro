@@ -1,0 +1,21 @@
+---
+import Post from "../components/Post.astro";
+const response = await fetch("http://localhost:3000/posts");
+const posts = await response.json();
+import DefaultLayout from "../layouts/DefaultLayout.astro";
+---
+
+<DefaultLayout>
+	<meta slot="header" charset="utf-8" />
+    <link slot="header" rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta slot="header" name="viewport" content="width=device-width" />
+    <meta slot="header" name="generator" content={Astro.generator} />
+    <title slot="header">My Astro APP</title>
+
+  <h1 class="text-center text-3xl font-bold mb-6 mt-3">Mis posts</h1>
+  <div
+    class="grid max-w-7xl mx-auto w-full justify-center justify-items-center items-center gap-4 px-2 sm:grid:cols-2 lg:grid-cols-3"
+  >
+    {posts.map((post) => <Post post={post} />)}
+  </div>
+</DefaultLayout>
